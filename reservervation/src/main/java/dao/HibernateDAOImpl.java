@@ -7,11 +7,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 
-public class HibernateDAOImpl implements hibernate.dao.HibernateDAO {
+public class HibernateDAOImpl implements HibernateDAO {
 
     @Override
-    public void save(Object C){
-        Session session = HibernateUtil.CreateSessionFactory(C.getClass()).openSession();
+    public void save(Object C) {
+        HibernateUtil hibernateUtil = new HibernateUtil();
+        Session session = hibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(C);
         session.getTransaction().commit();
@@ -20,10 +21,11 @@ public class HibernateDAOImpl implements hibernate.dao.HibernateDAO {
 
     @Override
     public <T> void delete(Class<T> C, Integer id) throws InstantiationException, IllegalAccessException {
-        Session session = HibernateUtil.CreateSessionFactory(C).openSession();
+        HibernateUtil hibernateUtil = new HibernateUtil();
+        Session session = hibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Object O = session.get(C, id);
-        if(O != null){
+        if (O != null) {
             session.delete(O);
         }
         session.getTransaction().commit();
@@ -31,8 +33,9 @@ public class HibernateDAOImpl implements hibernate.dao.HibernateDAO {
     }
 
     @Override
-    public void merge(Object C){
-        Session session = HibernateUtil.CreateSessionFactory(C.getClass()).openSession();
+    public void merge(Object C) {
+        HibernateUtil hibernateUtil = new HibernateUtil();
+        Session session = hibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.merge(C);
         session.getTransaction().commit();
@@ -41,7 +44,8 @@ public class HibernateDAOImpl implements hibernate.dao.HibernateDAO {
 
     @Override
     public <T> ArrayList<T> show(Class<T> C) throws InstantiationException, IllegalAccessException {
-        Session session = HibernateUtil.CreateSessionFactory(C).openSession();
+        HibernateUtil hibernateUtil = new HibernateUtil();
+        Session session = hibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(C);
@@ -52,10 +56,10 @@ public class HibernateDAOImpl implements hibernate.dao.HibernateDAO {
         return data;
     }
 
-
     @Override
     public <T> Object get(Class<T> C, Integer id) throws InstantiationException, IllegalAccessException {
-        Session session = HibernateUtil.CreateSessionFactory(C).openSession();
+        HibernateUtil hibernateUtil = new HibernateUtil();
+        Session session = hibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Object data = session.get(C, id);
         session.getTransaction().commit();

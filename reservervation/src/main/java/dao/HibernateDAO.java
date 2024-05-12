@@ -1,4 +1,5 @@
-package hibernate.dao;
+
+package dao;
 
 
 import java.util.ArrayList;
