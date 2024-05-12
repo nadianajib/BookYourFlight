@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 public class app {
     public static void main(String[] args) {
+        System.out.println("hello");
        /* System.out.println("hey main");
         Configuration cfg = new Configuration();
         cfg.configure("hibernate.xml");

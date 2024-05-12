@@ -1,46 +1,85 @@
 package com.example.reservervation;
 
 import javax.persistence.Entity;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Reservation {
+@Table(name = "Reservation")
+public class reservation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "ID_Reservations")
+    private int idReservations;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "ID_Utilisateurs")
+    private utilisateur utilisateur;
 
     @ManyToOne
-    @JoinColumn(name = "seat_id")
-    private Seat seat;
+    @JoinColumn(name = "ID_Siege")
+    private siege siege;
 
     @ManyToOne
-    @JoinColumn(name = "passenger_name")
-    private Passenger passengerName;
+    @JoinColumn(name = "ID_Passager")
+    private passager passager;
 
-    public Reservation() {}
-
-    public Reservation(User user, Seat seat, Passenger passengerName) {
-        this.user = user;
-        this.seat = seat;
-        this.passengerName = passengerName;
+    public reservation() {
+        super();
     }
 
-    public Long getId() {
-        return id;
+    public reservation(utilisateur utilisateur, siege siege, passager passager) {
+        super();
+        this.utilisateur = utilisateur;
+        this.siege = siege;
+        this.passager = passager;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public reservation(int idReservations, utilisateur utilisateur, siege siege, passager passager) {
+        super();
+        this.idReservations = idReservations;
+        this.utilisateur = utilisateur;
+        this.siege = siege;
+        this.passager = passager;
     }
 
-    public User getUser() {
-        return user;
+    // Getters and setters
+
+    public int getIdReservations() {
+        return idReservations;
     }
+
+    public void setIdReservations(int idReservations) {
+        this.idReservations = idReservations;
+    }
+
+    public utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    public siege getSiege() {
+        return siege;
+    }
+
+    public void setSiege(siege siege) {
+        this.siege = siege;
+    }
+
+    public passager getPassager() {
+        return passager;
+    }
+
+    public void setPassager(passager passager) {
+        this.passager = passager;
+    }
+}

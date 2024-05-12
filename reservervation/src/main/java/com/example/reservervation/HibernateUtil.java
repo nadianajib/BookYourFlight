@@ -34,5 +34,7 @@ public class HibernateUtil {
     }
 
     public static SessionBuilder<SessionBuilder> CreateSessionFactory(Class<?> aClass) {
+        return null;
     }
 }
+
